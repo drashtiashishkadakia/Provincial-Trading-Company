@@ -545,7 +545,10 @@ function showCat(id,btn){document.querySelectorAll('.prod-panel').forEach(p=>p.c
 function submitForm(){
   const n=document.getElementById('cn').value.trim(),p=document.getElementById('cp').value.trim(),m=document.getElementById('cm').value.trim();
   if(!n||!p||!m){alert('Please fill in your name, phone number, and what you need.');return;}
-  const txt=encodeURIComponent(`Hi, I found Provincial Trading Co. on your website.\n\nName: ${n}\nCompany: ${document.getElementById('cc').value.trim()||'N/A'}\nEnquiry: ${document.getElementById('ct').value||'General'}\n\n${m}`);
+  const company=document.getElementById('cc').value.trim()||'N/A';
+  const enquiryType=document.getElementById('ct').value||'General Enquiry';
+  const subject=encodeURIComponent('Website Enquiry from '+n+' — '+enquiryType);
+  const body=encodeURIComponent('Hello,\n\nYou have received a new enquiry from your website.\n\nName: '+n+'\nCompany: '+company+'\nPhone: '+p+'\nEnquiry Type: '+enquiryType+'\n\nMessage:\n'+m+'\n\n---\nSent from Provincial Trading Co. website');
   window.location.href='mailto:videhee6@gmail.com?subject='+subject+'&body='+body;
   document.getElementById('form-ok').style.display='block';
   document.querySelector('.form-btn').style.display='none';
