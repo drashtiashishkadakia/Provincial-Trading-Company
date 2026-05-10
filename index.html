@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provincial Trading Co. | Precision Hardware | Mumbai</title>
+  <meta name="description" content="Mumbai's trusted wholesale and retail hardware supplier since 1993. MS bolts, brass fittings, SS hardware, pipe fittings and hand tools. Call +91 9869068052.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:  #0B1F3A;
+      --navy2: #0D2444;
+      --navy3: #071628;
+      --gold:  #E6BE50;
+      --gold2: #FFF0A0;
+      --gold3: #C8960A;
+      --white: #FFFFFF;
+      --cream: #F5F0E8;
+      --grey:  rgba(255,255,255,0.5);
+      --grey2: rgba(255,255,255,0.25);
+      --border:rgba(230,190,80,0.12);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--navy); color: var(--white); overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy3); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px; height: 68px;
+      background: rgba(11,31,58,0.93);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    nav.scrolled { height: 58px; background: rgba(7,22,40,0.98); border-bottom-color: rgba(230,190,80,0.22); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-diamond {
+      width: 32px; height: 32px; border: 1.5px solid var(--gold);
+      transform: rotate(45deg); display: flex; align-items: center; justify-content: center;
+      transition: transform 0.4s; flex-shrink: 0;
+    }
+    .nav-diamond:hover { transform: rotate(90deg); }
+    .nav-diamond span {
+      transform: rotate(-45deg);
+      font-family: var(--serif); font-size: 15px; font-weight: 600;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-name { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--white); letter-spacing: .02em; }
+    .nav-name em { font-style: italic; background: linear-gradient(135deg,var(--gold),var(--gold2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--grey); text-decoration: none; position: relative; padding-bottom: 4px; transition: color .2s;
+    }
+    .nav-links a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:1px; background:linear-gradient(90deg,var(--gold),var(--gold2)); transition:width .3s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--navy3); text-decoration: none; padding: 9px 22px;
+      background: linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2),var(--gold));
+      background-size: 200% auto; position: relative; overflow: hidden;
+      animation: goldBtnShimmer 4s ease-in-out infinite;
+    }
+    .nav-cta::after { content:''; position:absolute; top:0; left:-100%; width:50%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent); animation:btnShine 3s ease-in-out infinite; }
+
+    /* HERO */
+    #hero { position:relative; min-height:100vh; display:flex; align-items:center; padding-top:68px; overflow:hidden; }
+    .hero-shimmer {
+      position:absolute; inset:0; z-index:0;
+      background: radial-gradient(ellipse at 15% 50%,rgba(99,160,255,.1) 0%,transparent 55%),
+                  radial-gradient(ellipse at 80% 20%,rgba(230,190,80,.1) 0%,transparent 45%),
+                  radial-gradient(ellipse at 55% 90%,rgba(60,100,200,.07) 0%,transparent 40%);
+      animation: heroGlow 7s ease-in-out infinite alternate;
+    }
+    .hero-grid {
+      position:absolute; inset:0; z-index:0;
+      background-image: linear-gradient(rgba(230,190,80,.04) 1px,transparent 1px), linear-gradient(90deg,rgba(230,190,80,.04) 1px,transparent 1px);
+      background-size: 52px 52px;
+      animation: gridDrift 15s linear infinite;
+    }
+    .hero-topline { position:absolute; top:68px; left:0; right:0; height:2px; z-index:3; background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent); animation:shimmerSlide 4s ease-in-out infinite; }
+    .hero-inner {
+      position:relative; z-index:2; width:100%; max-width:1360px; margin:0 auto;
+      padding:60px 56px; display:grid; grid-template-columns:1fr 480px; gap:48px; align-items:center;
+    }
+    .hero-over { display:flex; align-items:center; gap:12px; margin-bottom:24px; opacity:0; animation:fadeUp .6s .2s forwards; }
+    .hero-over-line { width:32px; height:1px; background:linear-gradient(90deg,var(--gold),transparent); }
+    .hero-over-txt { font-size:10px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); }
+    h1.hh1 { font-family:var(--serif); font-size:clamp(44px,5.5vw,72px); font-weight:500; line-height:1.05; margin-bottom:22px; opacity:0; animation:fadeUp .7s .4s forwards; }
+    .hh1 .hw { color:var(--white); display:block; }
+    .hh1 .hg { display:block; font-style:italic; background:linear-gradient(135deg,var(--gold3) 0%,var(--gold) 35%,var(--gold2) 55%,var(--gold) 75%,var(--gold3) 100%); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:goldShimmer 4s linear infinite; }
+    .hero-sub { font-size:17px; font-weight:300; line-height:1.75; color:var(--grey); max-width:440px; margin-bottom:36px; border-left:2px solid rgba(230,190,80,.3); padding-left:16px; opacity:0; animation:fadeUp .7s .6s forwards; }
+    .hero-btns { display:flex; gap:12px; align-items:center; opacity:0; animation:fadeUp .7s .8s forwards; }
+    .hero-stats { display:flex; gap:0; margin-top:44px; padding-top:36px; border-top:1px solid rgba(230,190,80,.1); opacity:0; animation:fadeUp .7s 1s forwards; }
+    .hstat { flex:1; padding-right:28px; border-right:1px solid rgba(230,190,80,.08); margin-right:28px; }
+    .hstat:last-child { border-right:none; padding-right:0; margin-right:0; }
+    .hstat-n { font-family:var(--serif); font-size:30px; font-weight:500; background:linear-gradient(135deg,var(--gold),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
+    .hstat-l { font-size:11px; color:var(--grey2); margin-top:5px; letter-spacing:.06em; }
+    .hero-canvas { height:520px; position:relative; opacity:0; animation:fadeIn 1s .8s forwards; }
+    #threeCanvas { width:100%; height:100%; display:block; }
+    .canvas-hint { position:absolute; bottom:12px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:rgba(230,190,80,.35); }
+
+    /* BUTTONS */
+    .btn-gold {
+      font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+      padding:13px 30px; border:none; cursor:pointer; text-decoration:none; display:inline-block; color:var(--navy3);
+      background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2),var(--gold),var(--gold3));
+      background-size:300% auto; position:relative; overflow:hidden;
+      animation:goldBtnShimmer 4s ease-in-out infinite;
+    }
+    .btn-gold::after { content:''; position:absolute; top:0; left:-100%; width:50%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent); animation:btnShine 2.5s ease-in-out infinite; }
+    .btn-ghost { font-family:var(--sans); font-size:12px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; padding:13px 24px; color:var(--grey); border:1px solid rgba(230,190,80,.25); background:transparent; cursor:pointer; text-decoration:none; display:inline-block; transition:border-color .2s,color .2s; }
+    .btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+
+    /* TICKER */
+    .ticker { background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2)); padding:13px 0; overflow:hidden; position:relative; z-index:10; }
+    .ticker-track { display:flex; white-space:nowrap; animation:ticker 28s linear infinite; }
+    .ticker-item { font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--navy3); padding:0 36px; display:inline-flex; align-items:center; gap:14px; flex-shrink:0; }
+    .ticker-item::after { content:'◆'; font-size:7px; }
+
+    /* SECTIONS */
+    .sec { padding:100px 56px; }
+    .sec-inner { max-width:1300px; margin:0 auto; }
+    .eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+    .eline { width:28px; height:1px; }
+    .eline-gold { background:linear-gradient(90deg,var(--gold),transparent); }
+    .eline-dark { background:linear-gradient(90deg,#999,transparent); }
+    .etxt { font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; }
+    .etxt-gold { color:var(--gold); }
+    .etxt-dark { color:#888; }
+    h2.sh2 { font-family:var(--serif); font-size:clamp(34px,4vw,52px); font-weight:500; line-height:1.08; margin-bottom:16px; }
+    h2.sh2 em { font-style:italic; background:linear-gradient(135deg,var(--gold),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    h2.sh2-dark { color:#111; }
+    h2.sh2-dark em { background:linear-gradient(135deg,#666,#333); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s,transform .7s; }
+    .reveal.on { opacity:1; transform:translateY(0); }
+
+    /* PRODUCTS */
+    #products { background:#F8F6F1; }
+    .prod-hdr { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; margin-bottom:48px; }
+    .prod-sub { font-size:17px; font-weight:300; line-height:1.75; color:#666; border-left:2px solid #CCC; padding-left:16px; }
+    .cat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#E0DDD6; border:1px solid #E0DDD6; }
+    .cat-card { background:#F8F6F1; padding:32px 28px; text-decoration:none; display:block; position:relative; overflow:hidden; transition:background .2s; }
+    .cat-card:hover { background:#EFECE5; }
+    .cat-card::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:linear-gradient(90deg,var(--gold3),var(--gold)); transition:width .3s; }
+    .cat-card:hover::after { width:100%; }
+    .cat-name { font-family:var(--serif); font-size:22px; font-weight:600; color:#111; margin-bottom:8px; }
+    .cat-sub { font-size:13px; font-weight:300; line-height:1.6; color:#666; margin-bottom:16px; }
+    .cat-arrow { font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#111; border-bottom:1px solid #111; display:inline-block; padding-bottom:1px; transition:color .2s,border-color .2s; }
+    .cat-card:hover .cat-arrow { color:#7A3010; border-color:#7A3010; }
+
+    /* WHY US */
+    #why { background:var(--navy3); }
+    .why-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:56px; background:rgba(230,190,80,.06); border:1px solid rgba(230,190,80,.06); }
+    .wc { background:var(--navy3); padding:40px 28px; position:relative; overflow:hidden; transition:background .3s; }
+    .wc:hover { background:var(--navy2); }
+    .wc::before { content:''; position:absolute; top:0; left:0; width:2px; height:0; background:linear-gradient(180deg,var(--gold),var(--gold2)); transition:height .4s; }
+    .wc:hover::before { height:100%; }
+    .wc-num { font-family:var(--serif); font-size:48px; font-weight:300; font-style:italic; background:linear-gradient(135deg,var(--gold),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; opacity:.3; line-height:1; margin-bottom:18px; }
+    .wc-title { font-family:var(--serif); font-size:24px; font-weight:500; color:var(--white); margin-bottom:12px; }
+    .wc-desc { font-size:16px; font-weight:300; color:var(--grey2); line-height:1.7; }
+
+    /* ABOUT */
+    #about { background:var(--navy); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; margin-top:56px; }
+    .about-p { font-size:17px; font-weight:300; line-height:1.8; color:var(--grey); margin-bottom:20px; }
+    .about-panel { border:1px solid var(--border); position:relative; }
+    .about-panel::before { content:'EST. 1993'; position:absolute; top:-10px; left:24px; font-size:10px; font-weight:600; letter-spacing:.2em; color:var(--gold); background:var(--navy); padding:0 8px; }
+    .arow { padding:18px 28px; border-bottom:1px solid rgba(230,190,80,.07); display:flex; justify-content:space-between; align-items:center; gap:16px; transition:background .2s; }
+    .arow:hover { background:rgba(230,190,80,.03); }
+    .arow:last-child { border-bottom:none; }
+    .arow-l { font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:rgba(230,190,80,.4); }
+    .arow-v { font-family:var(--serif); font-size:18px; font-weight:500; color:var(--white); text-align:right; }
+
+    /* CONTACT */
+    #contact { background:var(--navy2); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:56px; }
+    .cinfo { display:flex; flex-direction:column; gap:32px; }
+    .ci-label { font-size:10px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:7px; }
+    .ci-value { font-size:17px; font-weight:300; color:var(--white); line-height:1.6; }
+    .ci-value a { color:var(--white); text-decoration:none; transition:color .2s; }
+    .ci-value a:hover { color:var(--gold); }
+    .call-btn { display:inline-flex; align-items:center; gap:10px; margin-top:10px; font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:13px 28px; text-decoration:none; color:var(--navy3); background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2)); background-size:200% auto; position:relative; overflow:hidden; animation:goldBtnShimmer 4s ease-in-out infinite; }
+    .call-btn::after { content:''; position:absolute; top:0; left:-100%; width:50%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent); animation:btnShine 2.5s ease-in-out infinite; }
+    .call-dot { width:7px; height:7px; border-radius:50%; background:var(--navy3); animation:pulse 2s infinite; }
+    .cform { display:flex; flex-direction:column; gap:16px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .fg { display:flex; flex-direction:column; gap:7px; }
+    .fg label { font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:rgba(230,190,80,.45); }
+    .fg input,.fg textarea,.fg select { font-family:var(--sans); font-size:14px; font-weight:300; color:var(--white); background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:13px 16px; outline:none; resize:none; width:100%; transition:border-color .2s,background .2s; }
+    .fg input:focus,.fg textarea:focus,.fg select:focus { border-color:rgba(230,190,80,.4); background:rgba(230,190,80,.03); }
+    .fg select option { background:var(--navy2); }
+    .form-btn { font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:14px 36px; border:none; cursor:pointer; align-self:flex-start; color:var(--navy3); background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2),var(--gold)); background-size:300% auto; position:relative; overflow:hidden; animation:goldBtnShimmer 4s ease-in-out infinite; }
+    .form-btn::after { content:''; position:absolute; top:0; left:-100%; width:50%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent); animation:btnShine 2.5s ease-in-out infinite; }
+    #form-ok { display:none; font-size:13px; font-weight:500; letter-spacing:.06em; color:var(--gold); padding:14px 0; }
+
+    /* FOOTER */
+    footer { background:var(--navy3); border-top:1px solid rgba(230,190,80,.1); padding:48px 56px; }
+    .footer-inner { max-width:1300px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; }
+    .footer-logo { font-family:var(--serif); font-size:20px; font-weight:500; color:var(--white); }
+    .footer-logo em { font-style:italic; background:linear-gradient(135deg,var(--gold),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .footer-sub { font-size:11px; color:var(--grey2); margin-top:4px; letter-spacing:.04em; }
+    .footer-links { display:flex; gap:28px; list-style:none; }
+    .footer-links a { font-size:11px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--grey2); text-decoration:none; transition:color .2s; }
+    .footer-links a:hover { color:var(--gold); }
+    .footer-copy { font-size:11px; color:rgba(255,255,255,.15); }
+
+    /* KEYFRAMES */
+    @keyframes heroGlow   { from{opacity:.7;transform:scale(1)} to{opacity:1;transform:scale(1.04)} }
+    @keyframes gridDrift  { from{background-position:0 0} to{background-position:52px 52px} }
+    @keyframes shimmerSlide { 0%,100%{opacity:.5} 50%{opacity:1} }
+    @keyframes goldShimmer { from{background-position:0% center} to{background-position:200% center} }
+    @keyframes goldBtnShimmer { 0%{background-position:0% center} 50%{background-position:100% center} 100%{background-position:0% center} }
+    @keyframes btnShine   { 0%{left:-100%} 60%{left:150%} 100%{left:150%} }
+    @keyframes ticker     { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    @keyframes fadeUp     { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn     { from{opacity:0} to{opacity:1} }
+    @keyframes pulse      { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      nav{padding:0 24px;} .nav-links{display:none;}
+      .sec{padding:72px 24px;}
+      .hero-inner{padding:48px 24px;grid-template-columns:1fr;}
+      .hero-canvas{display:none;}
+      .prod-hdr{grid-template-columns:1fr;gap:20px;}
+      .cat-grid{grid-template-columns:1fr 1fr;}
+      .why-grid{grid-template-columns:1fr 1fr;}
+      .about-grid{grid-template-columns:1fr;gap:48px;}
+      .contact-grid{grid-template-columns:1fr;gap:48px;}
+      footer{padding:40px 24px;}
+      .footer-inner{flex-direction:column;align-items:flex-start;}
+    }
+    @media(max-width:600px){
+      .prod-panel.active{grid-template-columns:1fr;}
+      .why-grid{grid-template-columns:1fr;}
+      .form-row{grid-template-columns:1fr;}
+      .hero-stats{flex-wrap:wrap;gap:20px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-diamond"><span>P</span></div>
+    <div class="nav-name">Provincial <em>Trading</em> Co.</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="products.html">Full Catalogue</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+919869068052" class="nav-cta">+91 98690 68052</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-shimmer"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-topline"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-over">
+        <div class="hero-over-line"></div>
+        <div class="hero-over-txt">Mumbai · Since 1993</div>
+      </div>
+      <h1 class="hh1">
+        <span class="hw">Precision hardware</span>
+        <span class="hw">for every job,</span>
+        <span class="hg">every time.</span>
+      </h1>
+      <p class="hero-sub">Wholesale and retail supply of MS bolts, brass fittings, SS hardware and hand tools. We serve contractors, manufacturers and workshops across India.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-gold">Browse Products</a>
+        <a href="#contact" class="btn-ghost">Get a Quote</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-n">30+</div><div class="hstat-l">Years in business</div></div>
+        <div class="hstat"><div class="hstat-n">500+</div><div class="hstat-l">Products stocked</div></div>
+        <div class="hstat"><div class="hstat-n">Pan‑India</div><div class="hstat-l">Delivery available</div></div>
+      </div>
+    </div>
+    <div class="hero-canvas">
+      <canvas id="threeCanvas"></canvas>
+      <div class="canvas-hint">Drag to rotate</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">MS Bolts &amp; Screws</span><span class="ticker-item">Brass Fasteners</span><span class="ticker-item">Nuts &amp; Washers</span><span class="ticker-item">Pipe Fittings</span><span class="ticker-item">SS Fittings</span><span class="ticker-item">Hand Tools</span><span class="ticker-item">J-Hooks</span><span class="ticker-item">GST Invoices</span><span class="ticker-item">Wholesale &amp; Retail</span><span class="ticker-item">Pan-India Delivery</span><span class="ticker-item">30+ Years Experience</span><span class="ticker-item">Mumbai · Nagdevi</span>
+    <span class="ticker-item">MS Bolts &amp; Screws</span><span class="ticker-item">Brass Fasteners</span><span class="ticker-item">Nuts &amp; Washers</span><span class="ticker-item">Pipe Fittings</span><span class="ticker-item">SS Fittings</span><span class="ticker-item">Hand Tools</span><span class="ticker-item">J-Hooks</span><span class="ticker-item">GST Invoices</span><span class="ticker-item">Wholesale &amp; Retail</span><span class="ticker-item">Pan-India Delivery</span><span class="ticker-item">30+ Years Experience</span><span class="ticker-item">Mumbai · Nagdevi</span>
+  </div>
+</div>
+
+<!-- PRODUCTS OVERVIEW -->
+<section id="products" class="sec" style="background:#F8F6F1;">
+  <div class="sec-inner">
+    <div class="prod-hdr reveal">
+      <div>
+        <div class="eyebrow"><div class="eline eline-dark"></div><div class="etxt etxt-dark">Our Catalogue</div></div>
+        <h2 class="sh2 sh2-dark">Everything your<br>project <em>needs</em></h2>
+      </div>
+      <p class="prod-sub">We stock a comprehensive range of fasteners, clamps, pins, washers and tools in MS, SS, Brass and High Tensile. Available in all thread standards — Metric, BSW, BSF, BA and UNF. Wholesale and retail. Call or email for pricing.</p>
+    </div>
+    <div class="cat-grid reveal">
+      <a href="products.html#bolts" class="cat-card">
+        <div class="cat-name">Bolts &amp; Screws</div>
+        <div class="cat-sub">Hex, Carriage, Allen Cap, CSK, Pan Head, Round Head, Stud, Coach &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#nuts" class="cat-card">
+        <div class="cat-name">Nuts</div>
+        <div class="cat-sub">Hex, Nylock, Dome, Flange, Castle, Insert, Long, Press, Wing &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#washers" class="cat-card">
+        <div class="cat-name">Washers</div>
+        <div class="cat-sub">Plain, Spring, Star, Wave, Disc, Fiber, Serrated &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#clamps" class="cat-card">
+        <div class="cat-name">Clamps &amp; Hooks</div>
+        <div class="cat-sub">U-Bolt, Jubilee Clip, Hose Clamp, Saddle, J Hook, L Hook, Pipe Hook &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#pins" class="cat-card">
+        <div class="cat-name">Pins &amp; Circlips</div>
+        <div class="cat-sub">Dowel, Split, Cotter, Grooved, Taper, Circlip &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#tools" class="cat-card">
+        <div class="cat-name">Tools &amp; Sundries</div>
+        <div class="cat-sub">Allen Keys, Hacksaw Blades, Pop Rivets, O Rings, Springs, Nails &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:48px;" class="reveal">
+      <a href="products.html" class="btn-gold" style="background:linear-gradient(135deg,#C8960A,#E6BE50,#FFF0A0,#E6BE50);color:#071628;">View Full Catalogue →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" class="sec">
+  <div class="sec-inner">
+    <div class="reveal">
+      <div class="eyebrow"><div class="eline eline-gold"></div><div class="etxt etxt-gold">Why Choose Us</div></div>
+      <h2 class="sh2">30 Years. <em>Zero Compromises.</em></h2>
+    </div>
+    <div class="why-grid">
+      <div class="wc reveal"><div class="wc-num">01</div><div class="wc-title">30+ Years Experience</div><div class="wc-desc">We have been in this business since 1993. That means deep product knowledge, strong supplier relationships and a reputation built over three decades in Mumbai's hardware trade.</div></div>
+      <div class="wc reveal"><div class="wc-num">02</div><div class="wc-title">GST-Compliant Billing</div><div class="wc-desc">We are fully GST registered since 2017. Every order comes with a proper tax invoice so your accounts team and project procurement process runs smoothly.</div></div>
+      <div class="wc reveal"><div class="wc-num">03</div><div class="wc-title">Bulk &amp; Project Supply</div><div class="wc-desc">Whether you need 10 pieces or 10,000, we handle both retail and large project orders with the same speed and accuracy every time.</div></div>
+      <div class="wc reveal"><div class="wc-num">04</div><div class="wc-title">Pan‑India Delivery</div><div class="wc-desc">We ship to clients all across India. Call or email us for a bulk shipment quote to your project site, warehouse or factory anywhere in the country.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="sec-inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="eyebrow"><div class="eline eline-gold"></div><div class="etxt etxt-gold">About Us</div></div>
+        <h2 class="sh2">Mumbai's hardware backbone, <em>since 1993.</em></h2>
+        <p class="about-p">Provincial Trading Co. has been a trusted name in Mumbai's hardware and fastener trade for over 30 years. Our shop is based in Nagdevi, one of Mumbai's oldest and most respected hardware markets, and we supply contractors, fabricators, electricians, plumbers and manufacturers across the country.</p>
+        <p class="about-p">We have built this business on three decades of straight dealing. Right products, fair prices and on time delivery. Whether you walk into our shop in Mumbai or place a bulk order from anywhere in India, you will always get the same quality and service.</p>
+        <a href="#contact" class="btn-gold" style="margin-top:8px;">Get in touch</a>
+      </div>
+      <div class="about-panel reveal">
+        <div class="arow"><div class="arow-l">Established</div><div class="arow-v">Since 1993</div></div>
+        <div class="arow"><div class="arow-l">Location</div><div class="arow-v">Kalbadevi, Mumbai 400003</div></div>
+        <div class="arow"><div class="arow-l">Business type</div><div class="arow-v">Wholesale + Retail</div></div>
+        <div class="arow"><div class="arow-l">Proprietor</div><div class="arow-v">Ashish Kadakia</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec">
+  <div class="sec-inner">
+    <div class="reveal">
+      <div class="eyebrow"><div class="eline eline-gold"></div><div class="etxt etxt-gold">Contact</div></div>
+      <h2 class="sh2">Get a quote. <em>Call or write.</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="cinfo reveal">
+        <div>
+          <div class="ci-label">Call Us</div>
+          <div class="ci-value"><a href="tel:+919869068052">+91 98690 68052</a></div>
+          <a href="tel:+919869068052" class="call-btn"><span class="call-dot"></span>Call Now</a>
+        </div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-value"><a href="mailto:provincialtradingcompany@gmail.com">provincialtradingcompany@gmail.com</a></div>
+        </div>
+        <div>
+          <div class="ci-label">Address</div>
+          <div class="ci-value">153, Nagdevi St, Khokha Bazar<br>Chippi Chawl, Kalbadevi<br>Mumbai, Maharashtra 400003</div>
+        </div>
+        <div>
+          <div class="ci-label">Business Hours</div>
+          <div class="ci-value">Monday – Saturday<br>10:00 AM – 7:00 PM IST</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="cform">
+          <div class="form-row">
+            <div class="fg"><label for="cn">Your name</label><input type="text" id="cn" placeholder="Rajesh Kumar"></div>
+            <div class="fg"><label for="cc">Company</label><input type="text" id="cc" placeholder="Kumar Construction Pvt Ltd"></div>
+          </div>
+          <div class="form-row">
+            <div class="fg"><label for="cp">Phone</label><input type="tel" id="cp" placeholder="+91 XXXXX XXXXX"></div>
+            <div class="fg"><label for="ct">Enquiry type</label>
+              <select id="ct"><option value="">Select one</option><option>Wholesale / Bulk Order</option><option>Retail Purchase</option><option>Project Supply</option><option>Price Quote</option><option>General Enquiry</option></select>
+            </div>
+          </div>
+          <div class="fg"><label for="cm">What do you need?</label><textarea id="cm" rows="4" placeholder="e.g. 500 nos M10 hex bolts Grade 8.8, 200 nos GI elbow 1 inch — please quote best wholesale price with delivery to Chennai..."></textarea></div>
+          <button class="form-btn" onclick="submitForm()">Send Enquiry →</button>
+          <div id="form-ok">✓ Your message has been sent — we'll get back to you within 24 hours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Provincial <em>Trading</em> Co.</div>
+      <div class="footer-sub">Nagdevi, Mumbai · Est. 1993 · Wholesale &amp; Retail Hardware</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 Provincial Trading Co. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  const canvas=document.getElementById('threeCanvas');
+  if(!canvas)return;
+  const W=canvas.parentElement.offsetWidth,H=canvas.parentElement.offsetHeight;
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(W,H);
+  renderer.setClearColor(0x000000,0);
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(42,W/H,0.1,100);
+  camera.position.set(0,0,8);
+  scene.add(new THREE.AmbientLight(0xffffff,0.3));
+  const d1=new THREE.DirectionalLight(0xE6BE50,2.0);d1.position.set(5,6,5);scene.add(d1);
+  const d2=new THREE.DirectionalLight(0x6699ff,0.6);d2.position.set(-4,-3,-2);scene.add(d2);
+  const pt=new THREE.PointLight(0xE6BE50,1.2,22);pt.position.set(0,3,4);scene.add(pt);
+  const mSteel=new THREE.MeshStandardMaterial({color:0x999999,metalness:.95,roughness:.12});
+  const mGold=new THREE.MeshStandardMaterial({color:0xC8A850,metalness:.92,roughness:.15});
+  const mDark=new THREE.MeshStandardMaterial({color:0x2A2A2A,metalness:.8,roughness:.3});
+  function mkBolt(m,s){
+    const g=new THREE.Group();
+    const head=new THREE.Mesh(new THREE.CylinderGeometry(.28*s,.28*s,.18*s,6),m);head.position.y=.09*s;g.add(head);
+    const shank=new THREE.Mesh(new THREE.CylinderGeometry(.12*s,.12*s,.9*s,16),m);shank.position.y=-.45*s;g.add(shank);
+    for(let i=0;i<6;i++){const r=new THREE.Mesh(new THREE.TorusGeometry(.13*s,.02*s,6,16),mDark);r.position.y=(-.1-i*.12)*s;r.rotation.x=Math.PI/2;g.add(r);}
+    return g;
+  }
+  function mkNut(m,s){
+    const g=new THREE.Group();
+    g.add(new THREE.Mesh(new THREE.CylinderGeometry(.3*s,.3*s,.22*s,6),m));
+    [[.11*s],[-.11*s]].forEach(([y])=>{const t=new THREE.Mesh(new THREE.TorusGeometry(.13*s,.025*s,8,16),mDark);t.rotation.x=Math.PI/2;t.position.y=y;g.add(t);});
+    return g;
+  }
+  function mkWasher(m,s){return new THREE.Mesh(new THREE.TorusGeometry(.28*s,.1*s,8,32),m);}
+  function mkPipe(m,s){
+    const g=new THREE.Group();
+    g.add(new THREE.Mesh(new THREE.CylinderGeometry(.12*s,.12*s,.8*s,12),m));
+    const b=new THREE.Mesh(new THREE.CylinderGeometry(.12*s,.12*s,.4*s,12),m);b.rotation.z=Math.PI/2;b.position.y=.15*s;g.add(b);
+    return g;
+  }
+  const group=new THREE.Group();scene.add(group);
+  const objs=[];
+  [[mkBolt,mSteel,1.1,[-1.8,.7,0],[.3,.5,.1]],[mkBolt,mGold,.85,[1.6,-.8,-.4],[.8,1.2,.3]],[mkBolt,mSteel,.7,[.2,1.9,.2],[1.2,.3,.5]],[mkNut,mSteel,1,[1.9,.9,0],[.2,.8,0]],[mkNut,mGold,.8,[-1.5,-1.2,.2],[.5,1.5,.2]],[mkWasher,mSteel,1,[0,-1.7,.3],[1,0,0]],[mkWasher,mDark,.7,[-2.2,-.2,-.3],[.5,.3,.4]],[mkPipe,mSteel,.9,[2.3,-.2,.1],[.4,.6,.3]]].forEach(([fn,m,s,p,r])=>{
+    const o=fn(m,s);o.position.set(...p);o.rotation.set(...r);
+    o._bp={x:p[0],y:p[1],z:p[2]};o._fo=Math.random()*Math.PI*2;o._fs=.4+Math.random()*.4;
+    o._rs=[(Math.random()-.5)*.005,(Math.random()-.5)*.008,(Math.random()-.5)*.003];
+    group.add(o);objs.push(o);
+  });
+  let drag=false,prev={x:0,y:0};
+  canvas.addEventListener('mousedown',e=>{drag=true;prev={x:e.clientX,y:e.clientY};});
+  window.addEventListener('mouseup',()=>drag=false);
+  window.addEventListener('mousemove',e=>{if(!drag)return;group.rotation.y+=(e.clientX-prev.x)*.008;group.rotation.x+=(e.clientY-prev.y)*.008;prev={x:e.clientX,y:e.clientY};});
+  canvas.addEventListener('touchstart',e=>{drag=true;prev={x:e.touches[0].clientX,y:e.touches[0].clientY};});
+  window.addEventListener('touchend',()=>drag=false);
+  window.addEventListener('touchmove',e=>{if(!drag)return;group.rotation.y+=(e.touches[0].clientX-prev.x)*.008;group.rotation.x+=(e.touches[0].clientY-prev.y)*.008;prev={x:e.touches[0].clientX,y:e.touches[0].clientY};});
+  window.addEventListener('resize',()=>{const w=canvas.parentElement.offsetWidth,h=canvas.parentElement.offsetHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();});
+  const clock=new THREE.Clock();
+  (function tick(){
+    requestAnimationFrame(tick);
+    const t=clock.getElapsedTime();
+    objs.forEach(o=>{o.position.y=o._bp.y+Math.sin(t*o._fs+o._fo)*.15;o.rotation.x+=o._rs[0];o.rotation.y+=o._rs[1];o.rotation.z+=o._rs[2];});
+    if(!drag)group.rotation.y+=.003;
+    pt.position.x=Math.sin(t*.5)*4;pt.position.z=Math.cos(t*.5)*4;
+    renderer.render(scene,camera);
+  })();
+})();
+
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-68,behavior:'smooth'});}});});
+function showCat(id,btn){document.querySelectorAll('.prod-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));document.getElementById('cat-'+id).classList.add('active');btn.classList.add('active');}
+function submitForm(){
+  const n=document.getElementById('cn').value.trim(),p=document.getElementById('cp').value.trim(),m=document.getElementById('cm').value.trim();
+  if(!n||!p||!m){alert('Please fill in your name, phone number, and what you need.');return;}
+  const company=document.getElementById('cc').value.trim()||'N/A';
+  const enquiryType=document.getElementById('ct').value||'General Enquiry';
+  const subject=encodeURIComponent('Website Enquiry from '+n+' — '+enquiryType);
+  const body=encodeURIComponent('Hello,\n\nYou have received a new enquiry from your website.\n\nName: '+n+'\nCompany: '+company+'\nPhone: '+p+'\nEnquiry Type: '+enquiryType+'\n\nMessage:\n'+m+'\n\n---\nSent from Provincial Trading Co. website');
+  window.location.href='mailto:provincialtradingcompany@gmail.com?subject='+subject+'&body='+body;
+  document.getElementById('form-ok').style.display='block';
+  document.querySelector('.form-btn').style.display='none';
+}
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+window.addEventListener('scroll',()=>{const bg=document.querySelector('.hero-shimmer');if(bg)bg.style.transform=`translateY(${scrollY*.25}px)`;});
+</script>
+</body>
+</html>
