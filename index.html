@@ -148,23 +148,15 @@
     #products { background:#F8F6F1; }
     .prod-hdr { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; margin-bottom:48px; }
     .prod-sub { font-size:17px; font-weight:300; line-height:1.75; color:#666; border-left:2px solid #CCC; padding-left:16px; }
-    .cat-tabs { display:flex; border-bottom:1px solid #E0DDD6; margin-bottom:40px; overflow-x:auto; }
-    .cat-tab { font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:13px 22px; background:transparent; border:none; color:#AAA; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap; transition:all .2s; }
-    .cat-tab:hover { color:#333; }
-    .cat-tab.active { color:#111; border-bottom-color:#111; }
-    .prod-panel { display:none; }
-    .prod-panel.active { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#E0DDD6; border:1px solid #E0DDD6; }
-    .pc { background:#F8F6F1; padding:28px 24px; position:relative; overflow:hidden; transition:background .2s; }
-    .pc:hover { background:#EFECE5; }
-    .pc::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:linear-gradient(90deg,var(--gold3),var(--gold)); transition:width .3s; }
-    .pc:hover::after { width:100%; }
-    .pc-num { font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#BBB; margin-bottom:16px; }
-    .pc-name { font-family:var(--serif); font-size:22px; font-weight:600; color:#111; margin-bottom:8px; }
-    .pc-desc { font-size:13px; font-weight:300; line-height:1.6; color:#666; margin-bottom:16px; }
-    .pc-specs { display:flex; flex-wrap:wrap; gap:5px; }
-    .pc-spec { font-size:10px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; background:#EAE7E0; color:#555; border:1px solid #DDD; }
-    .pc-link { display:inline-block; margin-top:16px; font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#111; text-decoration:none; border-bottom:1px solid #111; padding-bottom:1px; transition:color .2s,border-color .2s; }
-    .pc-link:hover { color:#7A3010; border-color:#7A3010; }
+    .cat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#E0DDD6; border:1px solid #E0DDD6; }
+    .cat-card { background:#F8F6F1; padding:32px 28px; text-decoration:none; display:block; position:relative; overflow:hidden; transition:background .2s; }
+    .cat-card:hover { background:#EFECE5; }
+    .cat-card::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:linear-gradient(90deg,var(--gold3),var(--gold)); transition:width .3s; }
+    .cat-card:hover::after { width:100%; }
+    .cat-name { font-family:var(--serif); font-size:22px; font-weight:600; color:#111; margin-bottom:8px; }
+    .cat-sub { font-size:13px; font-weight:300; line-height:1.6; color:#666; margin-bottom:16px; }
+    .cat-arrow { font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#111; border-bottom:1px solid #111; display:inline-block; padding-bottom:1px; transition:color .2s,border-color .2s; }
+    .cat-card:hover .cat-arrow { color:#7A3010; border-color:#7A3010; }
 
     /* WHY US */
     #why { background:var(--navy3); }
@@ -241,7 +233,7 @@
       .hero-inner{padding:48px 24px;grid-template-columns:1fr;}
       .hero-canvas{display:none;}
       .prod-hdr{grid-template-columns:1fr;gap:20px;}
-      .prod-panel.active{grid-template-columns:1fr 1fr;}
+      .cat-grid{grid-template-columns:1fr 1fr;}
       .why-grid{grid-template-columns:1fr 1fr;}
       .about-grid{grid-template-columns:1fr;gap:48px;}
       .contact-grid{grid-template-columns:1fr;gap:48px;}
@@ -266,6 +258,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#products">Products</a></li>
+    <li><a href="products.html">Full Catalogue</a></li>
     <li><a href="#why">Why Us</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -302,6 +295,7 @@
     </div>
     <div class="hero-canvas">
       <canvas id="threeCanvas"></canvas>
+      <div class="canvas-hint">Drag to rotate</div>
     </div>
   </div>
 </section>
@@ -314,57 +308,50 @@
   </div>
 </div>
 
-<!-- PRODUCTS -->
-<section id="products" class="sec">
+<!-- PRODUCTS OVERVIEW -->
+<section id="products" class="sec" style="background:#F8F6F1;">
   <div class="sec-inner">
     <div class="prod-hdr reveal">
       <div>
         <div class="eyebrow"><div class="eline eline-dark"></div><div class="etxt etxt-dark">Our Catalogue</div></div>
         <h2 class="sh2 sh2-dark">Everything your<br>project <em>needs</em></h2>
       </div>
-      <p class="prod-sub">We stock a full range of industrial fasteners, pipe fittings and hand tools. Everything is available in bulk wholesale quantities or individual retail packs. We do not list prices online so please call or email us for the best rate on any quantity.</p>
+      <p class="prod-sub">We stock a comprehensive range of fasteners, clamps, pins, washers and tools in MS, SS, Brass and High Tensile. Available in all thread standards — Metric, BSW, BSF, BA and UNF. Wholesale and retail. Call or email for pricing.</p>
     </div>
-    <div class="cat-tabs reveal">
-      <button class="cat-tab active" onclick="showCat('bolts',this)">MS Bolts &amp; Screws</button>
-      <button class="cat-tab" onclick="showCat('brass',this)">Brass Fasteners</button>
-      <button class="cat-tab" onclick="showCat('nuts',this)">Nuts &amp; Washers</button>
-      <button class="cat-tab" onclick="showCat('pipe',this)">Pipe Fittings</button>
-      <button class="cat-tab" onclick="showCat('ss',this)">SS Fittings</button>
-      <button class="cat-tab" onclick="showCat('tools',this)">Hand Tools</button>
+    <div class="cat-grid reveal">
+      <a href="products.html#bolts" class="cat-card">
+        <div class="cat-name">Bolts &amp; Screws</div>
+        <div class="cat-sub">Hex, Carriage, Allen Cap, CSK, Pan Head, Round Head, Stud, Coach &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#nuts" class="cat-card">
+        <div class="cat-name">Nuts</div>
+        <div class="cat-sub">Hex, Nylock, Dome, Flange, Castle, Insert, Long, Press, Wing &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#washers" class="cat-card">
+        <div class="cat-name">Washers</div>
+        <div class="cat-sub">Plain, Spring, Star, Wave, Disc, Fiber, Serrated &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#clamps" class="cat-card">
+        <div class="cat-name">Clamps &amp; Hooks</div>
+        <div class="cat-sub">U-Bolt, Jubilee Clip, Hose Clamp, Saddle, J Hook, L Hook, Pipe Hook &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#pins" class="cat-card">
+        <div class="cat-name">Pins &amp; Circlips</div>
+        <div class="cat-sub">Dowel, Split, Cotter, Grooved, Taper, Circlip &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
+      <a href="products.html#tools" class="cat-card">
+        <div class="cat-name">Tools &amp; Sundries</div>
+        <div class="cat-sub">Allen Keys, Hacksaw Blades, Pop Rivets, O Rings, Springs, Nails &amp; more</div>
+        <div class="cat-arrow">View all →</div>
+      </a>
     </div>
-
-    <div class="prod-panel active" id="cat-bolts">
-      <div class="pc"><div class="pc-num">01</div><div class="pc-name">Hex Head Bolts</div><div class="pc-desc">Standard MS hex bolts for structural, mechanical and general engineering. All metric and imperial sizes.</div><div class="pc-specs"><span class="pc-spec">M4–M36</span><span class="pc-spec">Grade 4.6/8.8</span><span class="pc-spec">Zinc plated</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">02</div><div class="pc-name">Socket Head Screws</div><div class="pc-desc">Allen key socket cap screws in MS for machinery, fixtures and precision assemblies needing high clamping force.</div><div class="pc-specs"><span class="pc-spec">M3–M24</span><span class="pc-spec">12.9 Grade</span><span class="pc-spec">Black oxide</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">03</div><div class="pc-name">Carriage Bolts</div><div class="pc-desc">Round head square neck bolts for wood-to-metal connections in construction and structural applications.</div><div class="pc-specs"><span class="pc-spec">M6–M20</span><span class="pc-spec">MS/GI finish</span><span class="pc-spec">Bulk packs</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">04</div><div class="pc-name">Self-Tapping Screws</div><div class="pc-desc">Pan head and countersunk self-tappers for sheet metal, plastic and thin material fastening.</div><div class="pc-specs"><span class="pc-spec">No.4–No.14</span><span class="pc-spec">Zinc plated</span><span class="pc-spec">SS option</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">05</div><div class="pc-name">Foundation Bolts</div><div class="pc-desc">J-type and L-type anchor bolts for machinery and structural foundation work on construction sites.</div><div class="pc-specs"><span class="pc-spec">M10–M48</span><span class="pc-spec">Custom lengths</span><span class="pc-spec">Project supply</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">06</div><div class="pc-name">Stud Bolts</div><div class="pc-desc">Fully and partially threaded stud bolts for flanged pipe joints and heavy engineering applications.</div><div class="pc-specs"><span class="pc-spec">M8–M30</span><span class="pc-spec">B7/B8 Grade</span><span class="pc-spec">Wholesale</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-    </div>
-    <div class="prod-panel" id="cat-brass">
-      <div class="pc"><div class="pc-num">01</div><div class="pc-name">Brass Hex Bolts</div><div class="pc-desc">Corrosion-resistant brass bolts for electrical panels, switchgear and plumbing fixtures.</div><div class="pc-specs"><span class="pc-spec">M3–M16</span><span class="pc-spec">IS 1367</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">02</div><div class="pc-name">Brass Inserts</div><div class="pc-desc">Threaded knurled inserts for plastic moulding, PCB standoffs and precision assemblies.</div><div class="pc-specs"><span class="pc-spec">M2–M10</span><span class="pc-spec">Knurled finish</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">03</div><div class="pc-name">Brass Screws &amp; Nuts</div><div class="pc-desc">Full range of brass machine screws, wood screws, hex nuts and square nuts in all standard sizes.</div><div class="pc-specs"><span class="pc-spec">M2–M12</span><span class="pc-spec">Bulk available</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-    </div>
-    <div class="prod-panel" id="cat-nuts">
-      <div class="pc"><div class="pc-num">01</div><div class="pc-name">Hex Nuts</div><div class="pc-desc">Standard hex nuts in MS, SS 304/316 and brass for all general engineering applications.</div><div class="pc-specs"><span class="pc-spec">M4–M36</span><span class="pc-spec">Grade 6/8</span><span class="pc-spec">MS/SS/Brass</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">02</div><div class="pc-name">Lock Nuts</div><div class="pc-desc">Nylon insert and all-metal prevailing torque lock nuts for vibration-prone applications.</div><div class="pc-specs"><span class="pc-spec">M4–M24</span><span class="pc-spec">DIN 985/982</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">03</div><div class="pc-name">Flat &amp; Spring Washers</div><div class="pc-desc">Flat washers (DIN 125) and spring lock washers in MS, zinc plated and stainless steel.</div><div class="pc-specs"><span class="pc-spec">M4–M30</span><span class="pc-spec">DIN 125/127</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-    </div>
-    <div class="prod-panel" id="cat-pipe">
-      <div class="pc"><div class="pc-num">01</div><div class="pc-name">GI Pipe Fittings</div><div class="pc-desc">Galvanised iron elbows, tees, sockets, unions and reducers for water supply and plumbing.</div><div class="pc-specs"><span class="pc-spec">½"–4"</span><span class="pc-spec">IS 1239</span><span class="pc-spec">Bulk supply</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">02</div><div class="pc-name">MS Pipe Fittings</div><div class="pc-desc">Mild steel threaded fittings for industrial piping systems, fabrication and structural applications.</div><div class="pc-specs"><span class="pc-spec">½"–3"</span><span class="pc-spec">All angles</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">03</div><div class="pc-name">J-Hooks &amp; Pipe Clamps</div><div class="pc-desc">J-hooks, pipe saddles and U-clamps for cable management, pipe support and conduit work.</div><div class="pc-specs"><span class="pc-spec">All sizes</span><span class="pc-spec">GI/MS</span><span class="pc-spec">Retail &amp; bulk</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-    </div>
-    <div class="prod-panel" id="cat-ss">
-      <div class="pc"><div class="pc-num">01</div><div class="pc-name">SS 304 Fittings</div><div class="pc-desc">Grade 304 stainless steel pipe fittings for food processing, pharma and general corrosion resistance.</div><div class="pc-specs"><span class="pc-spec">¼"–2"</span><span class="pc-spec">304 Grade</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">02</div><div class="pc-name">SS 316 Marine Grade</div><div class="pc-desc">High-grade 316 SS for marine, offshore and chemical environments needing superior corrosion resistance.</div><div class="pc-specs"><span class="pc-spec">316 Grade</span><span class="pc-spec">All types</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">03</div><div class="pc-name">SS Fasteners</div><div class="pc-desc">Full range of SS nuts, bolts, screws and washers in 304 and 316 grade for all industries.</div><div class="pc-specs"><span class="pc-spec">M3–M24</span><span class="pc-spec">304/316</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-    </div>
-    <div class="prod-panel" id="cat-tools">
-      <div class="pc"><div class="pc-num">01</div><div class="pc-name">Spanners &amp; Wrenches</div><div class="pc-desc">Open-end, ring and combination spanners, adjustable wrenches and socket sets. CRV steel.</div><div class="pc-specs"><span class="pc-spec">All sizes</span><span class="pc-spec">CRV Steel</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">02</div><div class="pc-name">Pliers &amp; Cutters</div><div class="pc-desc">Combination pliers, needle-nose, wire cutters and lineman's pliers for electrical and mechanical work.</div><div class="pc-specs"><span class="pc-spec">Various sizes</span><span class="pc-spec">Insulated option</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
-      <div class="pc"><div class="pc-num">03</div><div class="pc-name">Screwdrivers &amp; Allen Keys</div><div class="pc-desc">Flat, Phillips and Torx screwdrivers, hex key sets and T-bar allen keys for workshop and site use.</div><div class="pc-specs"><span class="pc-spec">Sets &amp; individual</span><span class="pc-spec">CRV/S2</span></div><a href="#contact" class="pc-link">Enquire →</a></div>
+    <div style="text-align:center;margin-top:48px;" class="reveal">
+      <a href="products.html" class="btn-gold" style="background:linear-gradient(135deg,#C8960A,#E6BE50,#FFF0A0,#E6BE50);color:#071628;">View Full Catalogue →</a>
     </div>
   </div>
 </section>
@@ -422,7 +409,7 @@
         </div>
         <div>
           <div class="ci-label">Email</div>
-          <div class="ci-value"><a href="mailto:videhee6@gmail.com">videhee6@gmail.com</a></div>
+          <div class="ci-value"><a href="mailto:provincialtradingcompany@gmail.com">provincialtradingcompany@gmail.com</a></div>
         </div>
         <div>
           <div class="ci-label">Address</div>
@@ -548,7 +535,7 @@ function submitForm(){
   const enquiryType=document.getElementById('ct').value||'General Enquiry';
   const subject=encodeURIComponent('Website Enquiry from '+n+' — '+enquiryType);
   const body=encodeURIComponent('Hello,\n\nYou have received a new enquiry from your website.\n\nName: '+n+'\nCompany: '+company+'\nPhone: '+p+'\nEnquiry Type: '+enquiryType+'\n\nMessage:\n'+m+'\n\n---\nSent from Provincial Trading Co. website');
-  window.location.href='mailto:videhee6@gmail.com?subject='+subject+'&body='+body;
+  window.location.href='mailto:provincialtradingcompany@gmail.com?subject='+subject+'&body='+body;
   document.getElementById('form-ok').style.display='block';
   document.querySelector('.form-btn').style.display='none';
 }
