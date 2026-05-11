@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools & Sundries | Provincial Trading Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:#0B1F3A; --navy2:#0D2444; --navy3:#071628;
+      --gold:#E6BE50; --gold2:#FFF0A0; --gold3:#C8960A;
+      --beige:#F8F6F1; --beige2:#EFECE5; --beige3:#E0DDD6;
+      --ink:#111111; --ink2:#444444; --ink3:#666666;
+      --white:#FFFFFF; --grey:rgba(255,255,255,0.5); --grey2:rgba(255,255,255,0.25);
+      --border:rgba(230,190,80,0.12);
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--beige); color: var(--ink); overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy3); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:0 56px; height:68px; background:rgba(11,31,58,0.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); transition:all 0.3s; }
+    nav.scrolled { height:58px; background:rgba(7,22,40,0.98); }
+    .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .nav-diamond { width:32px; height:32px; border:1.5px solid var(--gold); transform:rotate(45deg); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .nav-diamond span { transform:rotate(-45deg); font-family:var(--serif); font-size:15px; font-weight:600; background:linear-gradient(135deg,var(--gold),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .nav-name { font-family:var(--serif); font-size:18px; font-weight:500; color:var(--white); }
+    .nav-name em { font-style:italic; background:linear-gradient(135deg,var(--gold),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .nav-links { display:flex; gap:28px; list-style:none; }
+    .nav-links a { font-size:12px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--grey); text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--gold); }
+    .nav-cta { font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--navy3); text-decoration:none; padding:9px 22px; background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2),var(--gold)); position:relative; overflow:hidden; }
+    .nav-cta::after { content:''; position:absolute; top:0; left:-100%; width:50%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent); animation:btnShine 3s ease-in-out infinite; }
+
+    /* HERO IMAGE */
+    .cat-hero { position:relative; height:480px; margin-top:68px; overflow:hidden; }
+    .cat-hero img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
+    .cat-hero-overlay { position:absolute; inset:0; background:linear-gradient(to right, rgba(7,22,40,0.85) 0%, rgba(7,22,40,0.5) 50%, rgba(7,22,40,0.2) 100%); }
+    .cat-hero-content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 56px; max-width:700px; }
+    .breadcrumb { display:flex; align-items:center; gap:8px; margin-bottom:20px; }
+    .breadcrumb a { font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.45); text-decoration:none; transition:color .2s; }
+    .breadcrumb a:hover { color:var(--gold); }
+    .breadcrumb span { font-size:11px; color:rgba(255,255,255,.3); }
+    .breadcrumb-current { font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+    h1.cat-h1 { font-family:var(--serif); font-size:clamp(40px,5vw,68px); font-weight:500; line-height:1.05; color:var(--white); margin-bottom:16px; }
+    h1.cat-h1 em { font-style:italic; background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:goldShimmer 4s linear infinite; background-size:200% auto; }
+    .cat-hero-sub { font-size:16px; font-weight:300; color:rgba(255,255,255,.65); line-height:1.65; max-width:480px; }
+    .mat-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .mat-tag { font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:5px 13px; border:1px solid rgba(230,190,80,.35); color:var(--gold); background:rgba(230,190,80,.08); }
+
+    /* BACK LINK */
+    .back-bar { background:var(--navy); padding:14px 56px; display:flex; align-items:center; gap:16px; }
+    .back-link { font-size:12px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--grey2); text-decoration:none; display:flex; align-items:center; gap:6px; transition:color .2s; }
+    .back-link:hover { color:var(--gold); }
+    .cat-links { display:flex; gap:0; margin-left:auto; overflow-x:auto; }
+    .cat-link { font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--grey2); text-decoration:none; padding:0 18px; border-left:1px solid rgba(255,255,255,.06); white-space:nowrap; transition:color .2s; }
+    .cat-link:hover { color:var(--gold); }
+    .cat-link.active { color:var(--gold); }
+
+    /* PRODUCTS */
+    .products-section { padding:72px 56px; }
+    .section-inner { max-width:1300px; margin:0 auto; }
+    .prod-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--beige3); border:1px solid var(--beige3); }
+    .prod-card { background:var(--beige); padding:28px 24px; position:relative; overflow:hidden; transition:background .2s; }
+    .prod-card:hover { background:var(--beige2); }
+    .prod-card::before { content:''; position:absolute; top:0; left:0; width:2px; height:0; background:linear-gradient(180deg,var(--gold3),var(--gold)); transition:height .35s; }
+    .prod-card:hover::before { height:100%; }
+    .pc-num { font-size:10px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#BBBBBB; margin-bottom:12px; }
+    .pc-name { font-family:var(--serif); font-size:21px; font-weight:600; color:var(--ink); margin-bottom:6px; }
+    .pc-desc { font-size:13px; font-weight:300; color:var(--ink3); line-height:1.4; margin-bottom:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .pc-tags { display:flex; flex-wrap:wrap; gap:5px; }
+    .pc-tag { font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:4px 10px; background:#EAE7E0; color:#555555; border:1px solid var(--beige3); }
+    .pc-enquire { display:inline-block; margin-top:16px; font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--ink); padding-bottom:1px; transition:color .2s,border-color .2s; }
+    .pc-enquire:hover { color:var(--gold3); border-color:var(--gold3); }
+
+    /* CTA */
+    .cta-bar { background:var(--navy3); padding:60px 56px; text-align:center; }
+    .cta-bar h2 { font-family:var(--serif); font-size:clamp(26px,3vw,38px); font-weight:500; color:var(--white); margin-bottom:12px; }
+    .cta-bar h2 em { font-style:italic; background:linear-gradient(135deg,var(--gold),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .cta-bar p { font-size:15px; font-weight:300; color:var(--grey); margin-bottom:28px; }
+    .cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .btn-gold { font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:13px 28px; border:none; cursor:pointer; text-decoration:none; display:inline-block; color:var(--navy3); background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2),var(--gold),var(--gold3)); background-size:300% auto; position:relative; overflow:hidden; animation:goldBtnShimmer 4s ease-in-out infinite; }
+    .btn-gold::after { content:''; position:absolute; top:0; left:-100%; width:50%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent); animation:btnShine 2.5s ease-in-out infinite; }
+    .btn-ghost { font-family:var(--sans); font-size:12px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; padding:13px 22px; color:var(--grey); border:1px solid rgba(230,190,80,.25); background:transparent; cursor:pointer; text-decoration:none; display:inline-block; transition:border-color .2s,color .2s; }
+    .btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+
+    /* FOOTER */
+    footer { background:var(--navy3); border-top:1px solid rgba(230,190,80,.1); padding:36px 56px; }
+    .footer-inner { max-width:1300px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; }
+    .footer-logo { font-family:var(--serif); font-size:18px; font-weight:500; color:var(--white); }
+    .footer-logo em { font-style:italic; background:linear-gradient(135deg,var(--gold),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .footer-sub { font-size:11px; color:var(--grey2); margin-top:3px; }
+    .footer-links { display:flex; gap:24px; list-style:none; }
+    .footer-links a { font-size:11px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--grey2); text-decoration:none; transition:color .2s; }
+    .footer-links a:hover { color:var(--gold); }
+    .footer-copy { font-size:11px; color:rgba(255,255,255,.15); }
+
+    @keyframes goldShimmer { from{background-position:0% center} to{background-position:200% center} }
+    @keyframes goldBtnShimmer { 0%{background-position:0% center} 50%{background-position:100% center} 100%{background-position:0% center} }
+    @keyframes btnShine { 0%{left:-100%} 60%{left:150%} 100%{left:150%} }
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity .7s,transform .7s; }
+    .reveal.on { opacity:1; transform:translateY(0); }
+
+    @media(max-width:1024px) {
+      nav{padding:0 24px;} .nav-links{display:none;}
+      .cat-hero-content{padding:0 24px;}
+      .back-bar{padding:12px 24px;}
+      .products-section{padding:48px 24px;}
+      .prod-grid{grid-template-columns:1fr 1fr;}
+      .cta-bar{padding:48px 24px;}
+      footer{padding:32px 24px;}
+    }
+    @media(max-width:600px){
+      .prod-grid{grid-template-columns:1fr;}
+      .cat-hero{height:360px;}
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-diamond"><span>P</span></div>
+    <div class="nav-name">Provincial <em>Trading</em> Co.</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Get a Quote</a>
+</nav>
+
+<div class="cat-hero">
+  <img src="tools.jpg" alt="Bolts and Screws — Provincial Trading Co.">
+  <div class="cat-hero-overlay"></div>
+  <div class="cat-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>›</span>
+      <a href="products.html">Products</a><span>›</span>
+      <span class="breadcrumb-current">Bolts &amp; Screws</span>
+    </div>
+    <h1 class="cat-h1">Tools &amp; <em>Sundries</em></h1>
+    <p class="cat-hero-sub">Hand tools, cutting tools and sundry items for workshops, contractors and site work.</p>
+    <div class="mat-row">
+      <span class="mat-tag">CRV Steel</span><span class="mat-tag">HSS</span><span class="mat-tag">Carbide</span>
+    </div>
+  </div>
+</div>
+
+<div class="back-bar">
+  <a href="products.html" class="back-link">← All Products</a>
+  <div class="cat-links">
+    <a href="tools.html" class="cat-link active">Bolts</a>
+    <a href="nuts.html" class="cat-link">Nuts</a>
+    <a href="washers.html" class="cat-link">Washers</a>
+    <a href="clamps.html" class="cat-link">Clamps</a>
+    <a href="pins.html" class="cat-link">Pins</a>
+    <a href="tools.html" class="cat-link active">Tools</a>
+  </div>
+</div>
+
+<section class="products-section">
+  <div class="section-inner">
+    <div class="prod-grid">
+      <div class="prod-card reveal"><div class="pc-num">01</div><div class="pc-name">Allen Key Set</div><div class="pc-desc">L-shaped and T-bar hex keys for driving socket head screws</div><div class="pc-tags"><span class="pc-tag">CRV Steel</span><span class="pc-tag">1.5mm–19mm</span><span class="pc-tag">Sets & individual</span></div><a href="index.html#contact" class="pc-enquire">Enquire →</a></div>
+      <div class="prod-card reveal"><div class="pc-num">02</div><div class="pc-name">Hacksaw Blades</div><div class="pc-desc">Junior and power hacksaw blades in HSS and bi-metal</div><div class="pc-tags"><span class="pc-tag">HSS / Bi-metal</span><span class="pc-tag">All sizes</span><span class="pc-tag">All TPI</span></div><a href="index.html#contact" class="pc-enquire">Enquire →</a></div>
+      <div class="prod-card reveal"><div class="pc-num">03</div><div class="pc-name">Hole Saw Cutters</div><div class="pc-desc">Carbide tipped hole saws for drilling large diameter holes</div><div class="pc-tags"><span class="pc-tag">Carbide tipped</span><span class="pc-tag">14mm–76mm</span></div><a href="index.html#contact" class="pc-enquire">Enquire →</a></div>
+      <div class="prod-card reveal"><div class="pc-num">04</div><div class="pc-name">O Rings</div><div class="pc-desc">Rubber sealing rings for hydraulic and pneumatic connections</div><div class="pc-tags"><span class="pc-tag">Nitrile / Viton</span><span class="pc-tag">All sizes</span></div><a href="index.html#contact" class="pc-enquire">Enquire →</a></div>
+      <div class="prod-card reveal"><div class="pc-num">05</div><div class="pc-name">Springs</div><div class="pc-desc">Compression, extension and torsion springs for engineering</div><div class="pc-tags"><span class="pc-tag">MS / SS / Brass / Aluminium</span><span class="pc-tag">All sizes</span></div><a href="index.html#contact" class="pc-enquire">Enquire →</a></div>
+      <div class="prod-card reveal"><div class="pc-num">06</div><div class="pc-name">Nails</div><div class="pc-desc">Wire, cut and masonry nails for construction and woodwork</div><div class="pc-tags"><span class="pc-tag">MS / GI</span><span class="pc-tag">All sizes</span></div><a href="index.html#contact" class="pc-enquire">Enquire →</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-bar">
+  <h2>Need a quote? <em>Call or write.</em></h2>
+  <p>We do not list prices online. Call or email for the best wholesale or retail rate on any quantity.</p>
+  <div class="cta-btns">
+    <a href="tel:+919869068052" class="btn-gold">+91 98690 68052</a>
+    <a href="index.html#contact" class="btn-ghost">Send Enquiry</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Provincial <em>Trading</em> Co.</div>
+      <div class="footer-sub">153, Nagdevi St, Kalbadevi, Mumbai 400003 · Est. 1993</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 Provincial Trading Co.</div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
